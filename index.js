@@ -8,74 +8,122 @@ function GetComputerChoice(){
             return "SCISSORS";
     }    
 }
-function GetPlayerChoice(){
+
+let round = 1;
+let wins = 0;
+let loses = 0;
+let status = 'l';
+
+
+
+function Play(player, e){
+
+    let pc = GetComputerChoice();
+
+    if( pc == "ROCK" && player == "PAPER" ||
+        pc == "PAPER" && player == "SCISSORS" ||
+        pc == "SCISSORS" && player == "ROCK"){
+        
+        status = 'w';
+        wins ++;
+        winner = player;
+        loser = pc;
+        
+    }else if(player == pc){
+        status = 'd';
+    }else{
+        status = 'l';
+        loses ++;
+        winner = pc;
+        loser = player;
+    }
+
+    round ++;
+
+    UpdateUi(status, player, pc);
+
+    if(wins == 5 || loses == 5){
+        GameOverUi(status);
+    }
+}
+
+function UpdateUi(status, player, machine){
     
-    let validChoice = false;
-    let invalid = "";
-    while(!validChoice){
-        let answer = prompt(invalid + " Choose your play (Rock/Paper/Scissors): ");
-        switch(answer.toUpperCase()){
-            case "ROCK":
-            case "R":
-                validChoice = true;
-                return "ROCK";
-            case "PAPER":
-            case "P":
-                validChoice = true;
-                return "PAPER";
-            case "SCISSOR":
-            case "SCISSORS":
-            case "S":
-                validChoice = true;
-                return "SCISSORS";
-            default:
-                invalid = "Opção inválida \n";
-                break;
-        }
+    const playerImage = document.getElementById("playerImage");
+    const machineImage = document.querySelector("#machineImage");
+
+    switch(player){
+        case 'ROCK':
+            playerImage.src = "./images/rock.png"
+            break;
+        case 'PAPER':
+            playerImage.src = "images/paper.png"
+            break;
+        case 'SCISSORS':
+            playerImage.src = "images/scissors.png"
+            break;
     }
-}
-function Play(pc, player){
 
-    let win = false;
-    if(pc == player){
-        return "Draw! Both player " + player;
+    switch(machine){
+        case 'ROCK':
+            machineImage.src = "./images/rock.png"
+            break;
+        case 'PAPER':
+            machineImage.src = "images/paper.png"
+            break;
+        case 'SCISSORS':
+            machineImage.src = "images/scissors.png"
+            break;
     }
-    else if(pc == "ROCK" && player == "PAPER")
-        win = true;
-    else if(pc == "PAPER" && player == "SCISSORS")
-        win = true;
-    else if(pc == "SCISSORS" && player == "ROCK")
-        win = true;
 
-    let winner = win ? player : pc;
-    let loser = !win ? player : pc;
 
-    return (`You ${win ? "WIN" : "LOSE"}! ${winner} beats ${loser}`);
+
+    let text = "";
+    if(status == 'd'){
+        text = `Round ${round}:  <span id='draw'><strong>DRAW!</strong></span> both played ${player}`;
+    }
+    else{ 
+        let win = status == 'w';
+        text = `Round ${round}: You <span id='${win ? 'win' : 'lose'}'><strong>${win ? "WIN" : "LOSE"}!</strong></span> ${win ? player : machine} beats ${!win ? player : machine}`;
+    }
+
+    const p = document.querySelector("#result");
+    p.innerHTML = text;
+
+    const playerE = document.querySelector("#player");
+    const machineE = document.querySelector("#machine");
+
+    playerE.textContent = wins;
+    machineE.textContent = loses;
+
 }
 
-function game(){
-    let playAgain = false;
-    do{
-        alert(Play(GetComputerChoice(), GetPlayerChoice()));
+function GameOverUi(status){
+    win = status == 'w';
 
-        let invalid = "";
-        let validChoice = false;
+    console.log("go to result");
 
-        while(!validChoice){
-            let answer = prompt(invalid + "Play again (Y/N): ");
-            switch(answer.toUpperCase()){
-                case "Y":
-                case "YES":
-                    playAgain = true;
-                    validChoice = true;
-                case "N":
-                case "NO":
-                    playAgain = false;
-                    validChoice = true;
-                default:
-                    invalid = "Opção inválida \n";
-                    break;
-            }
-        }   
-    }while(playAgain)
+    sessionStorage.setItem("win", status == 'w');
+
+    window.location.href = "./result.html";
 }
+function RestartGame(){
+    const p = document.querySelector("#result");
+    const playerE = document.querySelector("#player");
+    const machineE = document.querySelector("#machine");
+    const playerImage = document.getElementById("playerImage");
+    const machineImage = document.querySelector("#machineImage");
+
+    round = 1;
+    wins = 0;
+    loses = 0;
+
+
+    playerE.textContent = '0';
+    machineE.textContent = '0';
+    p.textContent = `Round ${round}:`;
+    playerImage.src = "images/question.png";
+    machineImage.src = "images/question.png";
+    console.log("teste");
+}
+RestartGame();

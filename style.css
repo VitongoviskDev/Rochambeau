@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body, html{
+    height: 100vh;
+    width: 100vw;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgb(180, 175, 134);
+    gap: 50px;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font: 900 22px 'Roboto', 'Arial';
+}
+
+.container-options{
+    display: flex;
+    justify-content: center;
+
+    width: 50%;
+
+    gap: 32px;
+}
+.container-options button{
+    height: 150px;
+    width: 150px;
+
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: rgb(218, 214, 182);
+}
+.container-options button img{
+    height: 75%;
+    width: 75%;
+}
+
+.container-result #win{
+    color: green;
+}
+.container-result #lose{
+    color: red;
+}
+.container-result #draw{
+    color: rgb(31, 29, 10);
+}
+/*Result SECTION*/
+.container-currentRound{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.plays{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 32px;
+}
+.play{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    height: 130px;
+    width: 100px;
+}
+.play p{
+    font: 400 18px 'Roboto';
+    margin-bottom: auto;
+}
+.play .image{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100px;
+    width: 100px;
+
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: rgb(218, 214, 182);
+}
+.play img{
+    height: 75%;
+    width: 75%;
+}
+
+.container-result{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    margin-top: 16px;
+    
+    font-family: 'Roboto';
+}
+
+#result{
+    font-size: 22px;
+}
+#score{
+    font-size: 48px;
+}
+#player{
+    color: green;
+}
+#machine{
+    color: red;
+}
+
+.container-restart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restart{
+    background-color: rgb(218, 214, 182);
+    padding: 16px 128px;
+
+    font: 400 36px 'Roboto';
+
+    border: 2px solid black;
+    border-radius: 10px;
+}

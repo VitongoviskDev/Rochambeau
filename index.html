@@ -5,26 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rochambeau (Console)</title>
-    <script src="index.js"></script>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        html, body{
-            height: 100%;
-            width: 100%;
-        }
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            font: bold 32px 'Helvetica', 'Arial', sans-serif;
-        }
-    </style>
+    <script src="index.js" defer></script>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    Please open your browser console
+    <div class="title">
+        <h1>ROCHAMBEAU</h1>
+    </div>
+    <div class="container-options">
+        <button id="Rock" onclick="Play('ROCK')">
+            <img src="./images/rock.png" alt="Rock">
+            <p>Rock</p>
+        </button>
+        <button id="Paper" onclick="Play('PAPER')">
+            <img src="./images/paper.png" alt="Rock">
+            <p>Paper</p>
+        </button>
+        <button id="Scissors" onclick="Play('SCISSORS')">
+            <img src="./images/scissors.png" alt="Rock">
+            <p>Scissors</p>
+        </button>
+    </div>
+    <div class="container-currentRound">
+        <div class="plays">
+            <div class="play">
+                <p>you</p>
+                <div class="image">
+                    <img id="playerImage" src="./images/question.png" alt="question-mark">
+                </div>
+            </div>
+            <div class="play">
+                <p>machine</p>
+                <div class="image">
+                    <img id="machineImage" src="./images/question.png" alt="question-mark">
+                </div>
+            </div>
+        </div>
+        <div class="container-result">
+            <div class="result">
+                <p id="result">Round 1:</p>
+            </div>
+            <div class="container-score">
+                <p id="score">Score: <span id="player">0</span> - <span id="machine">0</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="container-restart">
+        <button class="restart" onclick="RestartGame()">RESTART</button>
+    </div>
 </body>
 </html>
