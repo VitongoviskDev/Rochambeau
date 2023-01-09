@@ -2,9 +2,18 @@ let win = sessionStorage.getItem("win");
 
 function setUI(){
     const h1 = document.getElementById("finalResult");
-    console.log(h1);
-    h1.innerHTML = `YOU ${win ? "WIN" : "LOSE"}`;
-    h1.className = win ? "WIN" : "LOSE";
+    
+    console.log(win);
+    let status = '';
+    if(win == true){
+        status = 'WIN';
+    }else{
+        status = 'LOSE';
+    }
+    
+    h1.innerHTML = `YOU ${status}`;
+    console.log(status);
+    h1.className = status;
 }
 
 setUI();

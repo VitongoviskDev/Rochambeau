@@ -99,11 +99,11 @@ function UpdateUi(status, player, machine){
 }
 
 function GameOverUi(status){
-    win = status == 'w';
-
+    
     console.log("go to result");
-
-    sessionStorage.setItem("win", status == 'w');
+    
+    win = status == 'w';
+    sessionStorage.setItem("win", win);
 
     window.location.href = "./result.html";
 }
