@@ -13,15 +13,13 @@ let round = 1;
 let wins = 0;
 let loses = 0;
 let winStatus = 'LOSE';
+localStorage.win = JSON.stringify(false);
 
 
 
 function Play(player){
 
     let pc = GetComputerChoice();
-
-    console.log('player: ' + player);
-    console.log('pc: ' + pc);
 
     if( pc == "ROCK" && player == "PAPER" ||
         pc == "PAPER" && player == "SCISSORS" ||
@@ -31,20 +29,16 @@ function Play(player){
         wins ++;
         winner = player;
         loser = pc;
-        console.log(winStatus)
             
     }else if(player == pc){
         winStatus = 'DRAW';
-        console.log(winStatus)
     }else{
         winStatus = 'LOSE';
         loses ++;
         winner = pc;
         loser = player;
-        console.log(winStatus)
     }
     
-    console.log('PLAY ', winStatus)
     round ++;
 
     UpdateUi(winStatus, player, pc);
@@ -56,7 +50,6 @@ function Play(player){
 
 function UpdateUi(winStatus, player, machine){
     
-    console.log('UpdateUi ',winStatus)
     const playerImage = document.getElementById("playerImage");
     const machineImage = document.querySelector("#machineImage");
 
@@ -107,11 +100,9 @@ function UpdateUi(winStatus, player, machine){
 }
 
 function GameOverUi(winStatus){
-    
-    console.log("go to result");
-    console.log(winStatus);
     win = winStatus == 'WIN';
     localStorage.win = JSON.stringify(win);
+    console.log(localStorage.win);
 
     window.location.href = "./result.html";
 }
@@ -132,6 +123,5 @@ function RestartGame(){
     p.textContent = `Round ${round}:`;
     playerImage.src = "images/question.png";
     machineImage.src = "images/question.png";
-    console.log("teste");
 }
 RestartGame();
