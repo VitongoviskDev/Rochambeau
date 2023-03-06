@@ -1,4 +1,4 @@
-let win = sessionStorage.getItem("win");
+let win = JSON.parse(localStorage.win);
 
 function setUI(){
     const h1 = document.getElementById("finalResult");

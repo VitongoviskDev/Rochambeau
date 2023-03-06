@@ -12,43 +12,51 @@ function GetComputerChoice(){
 let round = 1;
 let wins = 0;
 let loses = 0;
-let status = 'l';
+let winStatus = 'LOSE';
 
 
 
-function Play(player, e){
+function Play(player){
 
     let pc = GetComputerChoice();
+
+    console.log('player: ' + player);
+    console.log('pc: ' + pc);
 
     if( pc == "ROCK" && player == "PAPER" ||
         pc == "PAPER" && player == "SCISSORS" ||
         pc == "SCISSORS" && player == "ROCK"){
-        
-        status = 'w';
+            
+            winStatus = 'WIN';
         wins ++;
         winner = player;
         loser = pc;
-        
+        console.log(winStatus)
+            
     }else if(player == pc){
-        status = 'd';
+        winStatus = 'DRAW';
+        console.log(winStatus)
     }else{
-        status = 'l';
+        winStatus = 'LOSE';
         loses ++;
         winner = pc;
         loser = player;
+        console.log(winStatus)
     }
-
+    
+    console.log('PLAY ', winStatus)
     round ++;
 
-    UpdateUi(status, player, pc);
+    UpdateUi(winStatus, player, pc);
 
     if(wins == 5 || loses == 5){
-        GameOverUi(status);
+        GameOverUi(winStatus);
     }
 }
 
-function UpdateUi(status, player, machine){
+function UpdateUi(winStatus, player, machine){
     
+    console.log('UpdateUi ',winStatus)
     const playerImage = document.getElementById("playerImage");
     const machineImage = document.querySelector("#machineImage");
 
@@ -79,11 +87,11 @@ function UpdateUi(status, player, machine){
 
 
     let text = "";
-    if(status == 'd'){
+    if(winStatus == 'DRAW'){
         text = `Round ${round}:  <span id='draw'><strong>DRAW!</strong></span> both played ${player}`;
     }
     else{ 
-        let win = status == 'w';
+        let win = winStatus == 'WIN';
         text = `Round ${round}: You <span id='${win ? 'win' : 'lose'}'><strong>${win ? "WIN" : "LOSE"}!</strong></span> ${win ? player : machine} beats ${!win ? player : machine}`;
     }
 
@@ -98,12 +106,12 @@ function UpdateUi(status, player, machine){
 
 }
 
-function GameOverUi(status){
+function GameOverUi(winStatus){
     
     console.log("go to result");
-    
-    win = status == 'w';
-    sessionStorage.setItem("win", win);
+    console.log(winStatus);
+    win = winStatus == 'WIN';
+    localStorage.win = JSON.stringify(win);
 
     window.location.href = "./result.html";
 }
